@@ -25,4 +25,4 @@
 - User should not access private route without login
 - Redirect user to login if token is invalid or not present
 - Logout Feature
-
+- Profile

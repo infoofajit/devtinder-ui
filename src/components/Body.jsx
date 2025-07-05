@@ -28,7 +28,7 @@ const Body = () => {
   }
 
   useEffect(() => {
-    if(userData === null) {
+    if(!userData) {
       fetchUser()
     }
   }, [])
