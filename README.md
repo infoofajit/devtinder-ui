@@ -25,4 +25,6 @@
 - User should not access private route without login
 - Redirect user to login if token is invalid or not present
 - Logout Feature
-- Profile
+- Get the feed from API, and add the feed in the store
+- Build the user card on feed
+- Profile page
