@@ -22,3 +22,7 @@
 - Add redux tool in Chrome
 - Navbar should update as soon as you login
 - Refactor code and add constants file + components directory
+- User should not access private route without login
+- Redirect user to login if token is invalid or not present
+- Logout Feature
+

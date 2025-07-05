@@ -11,6 +11,7 @@ const Login = () => {
   const navigate = useNavigate()
   const [emailId, setEmailId] = useState('nicholeen@gmail.com')
   const [password, setPassword] = useState('Nick@123')
+  const [err, setErr] = useState('')
 
   const handleLogin = async () => {
     try {
@@ -21,6 +22,7 @@ const Login = () => {
       dispatch(addUser(res.data))
       return navigate('/')
     } catch (err) {
+      setErr(err?.response?.data || "Something went wrong!")
       console.error("Something went wrong", err.message);
     }
   }
@@ -76,6 +78,7 @@ const Login = () => {
             />
           </label>
           <div className="validator-hint hidden">Enter valid email address</div>
+          <div className='text-red-600'>{err}</div>
           <div className="justify-end card-actions">
             <button className="btn btn-primary" onClick={handleLogin}>Login</button>
           </div>
