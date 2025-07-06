@@ -1,9 +1,9 @@
 import { useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import axios from "axios"
-import { BASE_URL } from '../utils/constants'
-import { addFeed } from '../utils/feedSlice'
-import FeedCard from "./FeedCard"
+import { BASE_URL } from '../../utils/constants'
+import { addFeed } from '../../utils/feedSlice'
+import FeedCard from "../FeedCard"
 
 const Feed = () => {
   const feed = useSelector((store) => store.feed)
@@ -30,7 +30,7 @@ const Feed = () => {
     <>
       <div className="flex justify-center mt-10">
         {feed?.users.map((user) => {
-          return <FeedCard user={user} />
+          return <FeedCard user={user} key={user?._id} />
         })}
       </div>
     </>
