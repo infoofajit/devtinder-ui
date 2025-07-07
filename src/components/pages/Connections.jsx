@@ -19,14 +19,14 @@ const Connections = () => {
     getConnections()
   }, [])
 
-  if(connections.length === 0) return <h2>No connection found!</h2>
+  if(connections?.length === 0) return <h2>No connection found!</h2>
 
   return (
     <div className="text-center mt-10 w-1/2">
       <h2 className='font-semibold text-2xl'>Connections</h2>
       <div className='flex flex-col bg-base-300'>
         {connections?.map((user) => (
-          <div className='flex justify-center items-center gap-2'>
+          <div className='flex justify-center items-center gap-2' key={user?._id}>
             <img src={user?.avatar} alt="User" className='w-15 rounded-full' />
             <div className='flex flex-col text-left'>
               <p>{user?.firstName +" "+ user?.lastName}</p>

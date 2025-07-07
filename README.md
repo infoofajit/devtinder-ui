@@ -27,4 +27,7 @@
 - Logout Feature
 - Get the feed from API, and add the feed in the store
 - Build the user card on feed
-- Profile page
+- Edit Profile feature
+- Show toast message on save of profile
+- New Page: See all my connections
+- New Page: Connection Request
