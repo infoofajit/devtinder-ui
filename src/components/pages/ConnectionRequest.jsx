@@ -9,10 +9,26 @@ const ConnectionRequest = () => {
   const dispatch = useDispatch()
 
   const getConnectionRequestSlice = async () => {
-    const res = await axios.get(BASE_URL+"/user/requests/received", {
-      withCredentials: true
-    })
-    dispatch(addConnectionRequest(res.data.data))
+    try {
+      const res = await axios.get(BASE_URL+"/user/requests/received", {
+        withCredentials: true
+      })
+      dispatch(addConnectionRequest(res.data.data))
+    } catch (err) {
+      console.log(err.message)
+    }
+  }
+
+  const handleReviewRequest = async (status, _id) => {
+    try {
+      await axios.post(`${BASE_URL}/request/review/${status}/${_id}`, {}, {
+        withCredentials: true
+      })
+      // getConnectionRequestSlice()
+      // TODO: write a action to remove this id from redux store
+    } catch (err) {
+      console.log(err.message);
+    }
   }
 
   useEffect(() => {
@@ -36,8 +52,8 @@ const ConnectionRequest = () => {
                 <p>{about}</p>
               </div>
               <div className='flex gap-2'>
-                <button className="btn btn-primary">Reject</button>
-                <button className="btn btn-secondary">Accept</button>
+                <button className="btn btn-primary" onClick={() => handleReviewRequest('rejected', user?._id)}>Reject</button>
+                <button className="btn btn-secondary" onClick={() => handleReviewRequest('accepted', user?._id)}>Accept</button>
               </div>
             </div>
           )

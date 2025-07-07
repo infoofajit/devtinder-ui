@@ -22,6 +22,8 @@
 - Add redux tool in Chrome
 - Navbar should update as soon as you login
 - Refactor code and add constants file + components directory
+
+## UI Part-3
 - User should not access private route without login
 - Redirect user to login if token is invalid or not present
 - Logout Feature
@@ -29,5 +31,13 @@
 - Build the user card on feed
 - Edit Profile feature
 - Show toast message on save of profile
+
+## UI Part-4
 - New Page: See all my connections
 - New Page: Connection Request
+- Feature: Accept/Reject connection request
+
+Remaining
+- Send/ignore the user card from Feed
+- Singup new user
+- E2E testing
