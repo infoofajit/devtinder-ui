@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import axios from 'axios';
 import { useDispatch } from 'react-redux';
-import { useNavigate } from 'react-router';
+import { Link, useNavigate } from 'react-router';
 
 import { addUser } from '../../utils/userSlice'
 import { BASE_URL } from '../../utils/constants';
@@ -11,6 +11,9 @@ const Login = () => {
   const navigate = useNavigate()
   const [emailId, setEmailId] = useState('nicholeen@gmail.com')
   const [password, setPassword] = useState('Nick@123')
+  const [firstName, setFirstName] = useState('')
+  const [lastName, setLastName] = useState('')
+  const [isLogin, setIsLogin] = useState(true)
   const [err, setErr] = useState('')
 
   const handleLogin = async () => {
@@ -27,11 +30,30 @@ const Login = () => {
     }
   }
 
+  const handleSignUp = async () => {
+    try {
+      const res = await axios.post(BASE_URL+'/signup', {
+        firstName,
+        lastName,
+        emailId,
+        password
+      }, {withCredentials: true})
+      dispatch(addUser(res.data))
+      return navigate('/profile')
+    } catch (err) {
+      console.log(err.message)
+    }
+  }
+
   return (
     <div className='flex justify-center mt-20'>
       <div className="card w-96 bg-base-100 card-md shadow-sm">
         <div className="card-body">
           <h2 className="card-title">Login</h2>
+          {!isLogin ? <>
+            <input type="text" placeholder="Firstname" value={firstName} onChange={(e) => setFirstName(e.target.value)} className="input" />
+            <input type="text" placeholder="lastname" value={lastName} onChange={(e) => setLastName(e.target.value)} className="input" />
+          </> : ''}
           <label className="input validator">
             <svg className="h-[1em] opacity-50" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
               <g
@@ -79,8 +101,17 @@ const Login = () => {
           </label>
           <div className="validator-hint hidden">Enter valid email address</div>
           <div className='text-red-600'>{err}</div>
-          <div className="justify-end card-actions">
-            <button className="btn btn-primary" onClick={handleLogin}>Login</button>
+          <div className="flex flex-col items-center card-actions">
+            <div>
+              {isLogin ? (
+                <>New User? <button className='link' onClick={() => setIsLogin(!isLogin)}>Sign Up</button></>
+              ) : (
+                <>Already Signed-up? <button className='link' onClick={() => setIsLogin(!isLogin)}>Login</button></>
+              )}
+            </div>
+            <button className="btn btn-primary" onClick={isLogin ? handleLogin : handleSignUp}>
+              {isLogin ? 'Login' : 'Sign Up'}
+            </button>
           </div>
         </div>
       </div>
